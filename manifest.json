@@ -1,0 +1,45 @@
+{
+  "manifest_version": 2,
+  "name": "我的导航",
+  "version": "0.1.0",
+  "description": "我的导航描述",
+  "icons": {
+    "16": "images/16x16.png",
+    "48": "images/48x48.png",
+    "128": "Icon.png"
+  },
+  "browser_action": {
+    "default_title": "我的导航",
+    "default_icon": {
+     "19": "images/19x19.png",
+     "38": "images/38x38.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": ["js/background.js"]
+    // "page": "background.html",
+    // "persistent": true
+  },
+  // "content_scripts": [
+  //   {
+  //     "matches": ["*://*/*"],
+  //   }
+  // ],
+  "web_accessible_resources": [
+    "js/jquery.min.js",
+    "js/myscript.js"
+  ],
+  // "options_page": "options.html",
+  "permissions": [
+    "unlimitedStorage",
+    "contextMenus",
+    "cookies",
+    "tabs",
+    "notifications",
+    "http://*/*",
+    "https://*/*",
+    "activeTab",
+    "<all_urls>"
+  ]
+}

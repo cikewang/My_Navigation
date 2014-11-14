@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="./css/bootstrap.min.css">
+		<link rel="stylesheet" href="./css/bootstrap-theme.min.css">
+		<script src="./js/jquery.min.js"></script>
+		<script src="./js/bootstrap.min.js"></script>
+		<script src="./js/myscript.js"></script>
+		<script src="./js/jquery.cookie.js"></script>
+		<style>
+			.w {width:280px;}
+			.p10 {padding: 0 10px;}
+		</style>
+  	</head>
+	<body>		
+		<div class="w user-login-div" style="display:none;">
+			<h4>用户登陆：</h4>
+			<div class="user-login-msg pull-right hide">
+				<h6 class="puul-right text-danger"></h6>
+			</div>
+			<div class="clearfix"></div>
+			<div class="username-div input-group input-group-sm">
+				<span class="input-group-addon">用户名：</span>
+				<input type="text" id="username" name="username" width=20 class="form-control" placeholder="用户名/手机号/邮箱">
+			</div>
+			<div class="password-div input-group input-group-sm">
+				<span class="input-group-addon">密&nbsp;&nbsp;&nbsp;&nbsp;码：</span>
+				<input type="password" id="password" name="password" width=20 class="form-control" placeholder="密码">
+			</div>
+			<div class="" style="margin:5px auto;text-align:center;">
+				<button class="btn btn-primary btn-xs p10" data-loading-text="Loading..." type="button" id="login">
+				登陆
+				</button>
+				<button type="button" class="btn btn-primary btn-xs p10" id="register">
+				注册
+				</button>
+			</div>
+		</div>
+
+		<div class="w reg-div" style="display:none;">
+			<h4>用户注册：</h4>
+			<div class="user-reg-msg pull-right hide">
+				<h6 class="puul-right text-danger"></h6>
+			</div>
+			<div class="clearfix"></div>
+			<div class="username-reg-div input-group input-group-sm">
+				<span class="input-group-addon">用户名：</span>
+				<input type="text" id="reg_username" name="reg_username" width=20 class="form-control" placeholder="用户名/手机号/邮箱">
+			</div>
+			<div class="password-reg-div input-group input-group-sm">
+				<span class="input-group-addon">密&nbsp;&nbsp;&nbsp;&nbsp;码：</span>
+				<input type="text" id="reg_password" name="reg_password" width=20 class="form-control" placeholder="密码">
+			</div>
+			<div class="auth-reg-div input-group input-group-sm">
+				<span class="input-group-addon">验证码：</span>
+				<input type="text" id="auth_code" name="auth_code" width=5 class="form-control" placeholder="验证码">
+			</div>
+			<div class="" style="margin:5px auto;text-align:center;">
+				<button type="button" class="btn btn-primary btn-xs p10" id="register-reg">
+				提交注册
+				</button>
+				<button class="btn btn-primary btn-xs p10" data-loading-text="Loading..." type="button" id="login-reg">
+				已有账户去登陆
+				</button>
+			</div>
+		</div>
+
+		<div class="w sc-div" style="display:none;">
+			<h4>
+				<span class="pull-left">网页收藏：</span>
+				<span class="pull-right">[<a href="#" target="_blank" id="mynavigation">我的导航</a>]</span>
+			</h4>
+			<div class="clearfix"></div>
+			<div class="sc-msg pull-right hide">
+				<h6 class="puul-right text-danger"></h6>
+			</div>
+			<div class="clearfix"></div>
+			<div id="sc" style="padding-top:10px;">
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon">分类：</span>
+					<input type="text" id="category" name="category" width=20 class="form-control" placeholder="网站分类">
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon">名称：</span>
+					<input type="text" id="web_name" name="web_name" width=20 class="form-control" placeholder="网站名称">
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon">网址：</span>
+					<input type="text" id="web_url" name="web_url" width=20 class="form-control" placeholder="网址地址">
+				</div>
+			</div>
+			<div class="" style="margin:5px auto;text-align:center;">
+				<button class="btn btn-info btn-xs p10" id="huoqu" data-loading-text="Loading..." type="button">
+				自动获取
+				</button>
+				<button type="button" id="souchang"  class="btn btn-primary btn-xs p10">
+				提交收藏
+				</button>
+				<button type="button" class="close pull-right" id="loginOut">
+					<span class="sr-only">退出</span><span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+		</div>
+
+
+	</body>
+</html>
