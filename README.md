@@ -9,6 +9,8 @@ My_Navigation
 网站：
 	http://cikewang.com
 
-
+文档：
+	https://github.com/cikewang/My_Navigation/wiki
+	
 
 
