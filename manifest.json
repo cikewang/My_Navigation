@@ -16,21 +16,6 @@
     },
     "default_popup": "popup.html"
   },
-  "background": {
-    "scripts": ["js/background.js"]
-    // "page": "background.html",
-    // "persistent": true
-  },
-  // "content_scripts": [
-  //   {
-  //     "matches": ["*://*/*"],
-  //   }
-  // ],
-  "web_accessible_resources": [
-    "js/jquery.min.js",
-    "js/myscript.js"
-  ],
-  // "options_page": "options.html",
   "permissions": [
     "unlimitedStorage",
     "contextMenus",
