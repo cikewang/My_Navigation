@@ -14,4 +14,5 @@ My_Navigation
 	
 
 服务端代码：
-	https://github.com/cikewang/My_Navigation
+	https://github.com/cikewang/My_Navigation_Server
+	
