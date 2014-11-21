@@ -127,8 +127,8 @@ $(document).ready(function(){
 					$(".user-login-msg h6").addClass('text-primary');
 					$(".user-login-msg").removeClass('hide');
 					$(".user-login-msg h6").html('欢迎回来：'+data.msg.username);
-					$.cookie('username',data.msg.username);
-					$.cookie("uid",data.msg._id);	
+					$.cookie('username', data.msg.username, {expires:30});
+					$.cookie("uid", data.msg._id, {expires:30});
 					my_navigation_url();
 
 					setTimeout(function(i){
