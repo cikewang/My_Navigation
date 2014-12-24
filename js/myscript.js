@@ -8,6 +8,7 @@ $(document).ready(function(){
 	{
 		show_sc();
 		my_navigation_url();
+		get_category();
 	}
 
 	$("#register").click(function(){
@@ -80,64 +81,17 @@ $(document).ready(function(){
 		});
 	});
 
-
+	// 点击登录按钮 登录
 	$("#login").click(function(){
-		var username = $("#username").val();
-		var password = $("#password").val();
-		if(username == '' || typeof(username) == 'undefined')
-		{
-			$(".username-div").addClass('has-warning');
-			$(".user-login-msg").removeClass('hide');
-			$(".user-login-msg h6").html('用户名或密码错误');
-			return false;
-		}
-		else
-		{
-			$(".username-div").removeClass('has-warning');
-			$(".user-login-msg").addClass('hide');
-		}
-		
-		if(password == '' || typeof(password) == 'undefined')
-		{
-			$(".password-div").addClass('has-warning');
-			$(".user-login-msg").removeClass('hide');
-			$(".user-login-msg h6").html('用户名或密码错误');
-			return false;
-		}
-		else
-		{
-			$(".password-div").removeClass('has-warning');
-			$(".user-login-msg").addClass('hide');
-		}
-	
-		$.ajax({
-			type: "POST",
-			dataType:"json",
-			url: "http://cikewang.com/index.php?p=navigation&c=default&a=user_login",
-			data: {"username":username,"password":password},
-			success: function(data){
-				if (data.code < 0) 
-				{
-					$(".user-login-msg").removeClass('hide');
-					$(".user-login-msg h6").html(data.msg);
-				}
-				else
-				{
-					$(".user-login-msg h6").removeClass('text-danger');
-					$(".user-login-msg h6").addClass('text-primary');
-					$(".user-login-msg").removeClass('hide');
-					$(".user-login-msg h6").html('欢迎回来：'+data.msg.username);
-					$.cookie('username',data.msg.username, {expires:30});
-					$.cookie("uid",data.msg._id, {expires:30});	
-					my_navigation_url();
-
-					setTimeout(function(i){
-						show_sc();
-					},1500);
-					
-				}
-			}
-		});
+		user_login();
+	});
+	// 按回车键登录
+	var inp = $('input'); 
+	inp.keypress(function (e) { 
+	    var key = e.which;
+	    if (key == 13) {
+	       user_login();
+	    }
 	});
 
 	$("#huoqu").click(function(){
@@ -221,6 +175,24 @@ $(document).ready(function(){
 		}
 		
 	});
+	
+	$('#cate_action').click(function(){
+		var title= $(this).attr('title');
+		if(title == 'add')
+		{
+			$('#select_cate_div').html('<input type="text" id="category" name="category" width=20 class="form-control" placeholder="网站分类">')
+			$('#cate_action').html('选择分类');
+			$(this).attr('title','select');
+		}
+		else
+		{
+			get_category();
+		}
+		
+
+		
+	});
+	
 
 	$("#loginOut").click(function(){
 		$.removeCookie('username');
@@ -249,4 +221,90 @@ function my_navigation_url()
 {
 	url = "http://cikewang.com/"+$.cookie("uid");
 	$("#mynavigation").attr("href",url);
+}
+
+function user_login()
+{
+	var username = $("#username").val();
+	var password = $("#password").val();
+	if(username == '' || typeof(username) == 'undefined')
+	{
+		$(".username-div").addClass('has-warning');
+		$(".user-login-msg").removeClass('hide');
+		$(".user-login-msg h6").html('用户名或密码错误');
+		return false;
+	}
+	else
+	{
+		$(".username-div").removeClass('has-warning');
+		$(".user-login-msg").addClass('hide');
+	}
+	
+	if(password == '' || typeof(password) == 'undefined')
+	{
+		$(".password-div").addClass('has-warning');
+		$(".user-login-msg").removeClass('hide');
+		$(".user-login-msg h6").html('用户名或密码错误');
+		return false;
+	}
+	else
+	{
+		$(".password-div").removeClass('has-warning');
+		$(".user-login-msg").addClass('hide');
+	}
+	
+	$.ajax({
+		type: "POST",
+		dataType:"json",
+		url: "http://cikewang.com/index.php?p=navigation&c=default&a=user_login",
+		data: {"username":username,"password":password},
+		success: function(data){
+			if (data.code < 0) 
+			{
+				$(".user-login-msg").removeClass('hide');
+				$(".user-login-msg h6").html(data.msg);
+			}
+			else
+			{
+				$(".user-login-msg h6").removeClass('text-danger');
+				$(".user-login-msg h6").addClass('text-primary');
+				$(".user-login-msg").removeClass('hide');
+				$(".user-login-msg h6").html('欢迎回来：'+data.msg.username);
+				$.cookie('username',data.msg.username, {expires:30});
+				$.cookie("uid",data.msg._id, {expires:30});	
+				my_navigation_url();
+
+				setTimeout(function(i){
+					show_sc();
+				},1500);
+				
+			}
+		}
+	});
+}
+
+function get_category()
+{
+	$.ajax({
+		type: "POST",
+		dataType:"json",
+		url: "http://cikewang.com/index.php?p=navigation&c=default&a=get_category",
+		data: {"uid":$.cookie("uid")},
+		success: function(data){
+			length = data.length;
+			if (length <= 0) 
+			{
+				return false;
+			};
+			var str = '<select class="form-control  input-sm select_cate" id="category" name="category">';
+			str += "<option value='0'>*请选择已有分类*</option>";
+			for (var i = 0; i < length; i++) {
+				str += "<option value='"+data[i]['_id']+"'>"+data[i]['cate_name']+"</option>";
+			};
+			str += '</select>';
+			$('#select_cate_div').html(str);
+			$('#cate_action').html('添加分类');
+			$('#cate_action').attr('title','add');
+		}
+	});
 }
