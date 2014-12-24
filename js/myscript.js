@@ -220,3 +220,16 @@ function my_navigation_url()
 	url = "http://cikewang.com/"+$.cookie("uid");
 	$("#mynavigation").attr("href",url);
 }
+
+function get_category()
+{
+	$.ajax({
+		type: "POST",
+		dataType:"json",
+		url: "http://cikewang.com/index.php?p=navigation&c=default&a=get_category",
+		data: {"uid":$.cookie("uid")},
+		success: function(data){
+			alert(data);
+		}
+	});
+}
