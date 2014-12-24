@@ -89,19 +89,33 @@
 					<span class="input-group-addon">网址：</span>
 					<input type="text" id="web_url" name="web_url" width=20 class="form-control" placeholder="网址地址">
 				</div>
-			</div>
-			<div class="" style="margin:5px auto;text-align:center;">
-				<input type="hidden" id="web_icon_url" name="web_icon_url">
-				<button class="btn btn-info btn-xs p10" id="huoqu" data-loading-text="Loading..." type="button">
-				自动获取
-				</button>
-				<button type="button" id="souchang"  class="btn btn-primary btn-xs p10">
-				提交收藏
-				</button>
-				<button type="button" class="close pull-right" id="loginOut">
-					<span class="sr-only">退出</span><span aria-hidden="true">&times;</span>
-				</button>
-			</div>
+
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon">选表：</span>
+					<div style="margin-top:5px;margin-left:10px;">
+						<label class="radio-inline">
+						<input type="radio" name="table" id="table1" value="1" checked>
+						推荐表
+						</label >
+						<label class="radio-inline">
+						<input type="radio" name="table" id="table2" value="2" >
+						个人表
+						</label>
+					</div>
+				  </div>
+				</div>
+				<div class="" style="margin:5px auto;text-align:center;">
+					<input type="hidden" id="web_icon_url" name="web_icon_url">
+					<button class="btn btn-info btn-xs p10" id="huoqu" data-loading-text="Loading..." type="button">
+					自动获取
+					</button>
+					<button type="button" id="souchang"  class="btn btn-primary btn-xs p10">
+					提交收藏
+					</button>
+					<button type="button" class="close pull-right" id="loginOut">
+						<span class="sr-only">退出</span><span aria-hidden="true">&times;</span>
+					</button>
+				</div>
 		</div>
 
 

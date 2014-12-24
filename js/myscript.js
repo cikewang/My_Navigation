@@ -127,8 +127,8 @@ $(document).ready(function(){
 					$(".user-login-msg h6").addClass('text-primary');
 					$(".user-login-msg").removeClass('hide');
 					$(".user-login-msg h6").html('欢迎回来：'+data.msg.username);
-					$.cookie('username', data.msg.username, {expires:30});
-					$.cookie("uid", data.msg._id, {expires:30});
+					$.cookie('username',data.msg.username, {expires:30});
+					$.cookie("uid",data.msg._id, {expires:30});	
 					my_navigation_url();
 
 					setTimeout(function(i){
@@ -138,9 +138,6 @@ $(document).ready(function(){
 				}
 			}
 		});
-
-		
-		
 	});
 
 	$("#huoqu").click(function(){
@@ -156,6 +153,7 @@ $(document).ready(function(){
 		var web_name = $("#web_name").val();
 		var web_url = $("#web_url").val();
 		var web_icon_url = $("#web_icon_url").val();
+		var table = $("input[name='table']:checked").val(); 
 
 
 		if ($.cookie("uid") == '' || typeof($.cookie("uid")) == 'undefined') 
@@ -165,31 +163,63 @@ $(document).ready(function(){
 			return false;
 		};
 
-		$.ajax({
-			type: "POST",
-			dataType:"json",
-			url: "http://cikewang.com/index.php?p=navigation&c=default&a=add",
-			data: {"uid":$.cookie("uid"),"web_url":web_url,"web_name":web_name,'web_icon_url':web_icon_url,"cate_name":category},
-			success: function(data){
-				if (data.code < 0) 
-				{
-					$(".sc-msg").removeClass('hide');
-					$(".sc-msg h6").html(data.msg);
+		if(table == 1)
+		{
+			$.ajax({
+				type: "POST",
+				dataType:"json",
+				url: "http://cikewang.com/index.php?p=navigation&c=default&a=add_recommend",
+				data: {"uid":$.cookie("uid"),"web_url":web_url,"web_name":web_name,'web_icon_url':web_icon_url,"cate_name":category,"table":table},
+				success: function(data){
+					if (data.code < 0) 
+					{
+						$(".sc-msg").removeClass('hide');
+						$(".sc-msg h6").html(data.msg);
+					}
+					else
+					{
+						$(".sc-msg h6").removeClass('text-danger');
+						$(".sc-msg h6").addClass('text-primary');
+						$(".sc-msg").removeClass('hide');
+						$(".sc-msg h6").html(data.msg);
+					}
+					setTimeout(function(i){
+						$(".sc-msg").addClass('hide');
+						$("#web_name").val('');
+						$("#web_url").val('');
+					},3000);
 				}
-				else
-				{
-					$(".sc-msg h6").removeClass('text-danger');
-					$(".sc-msg h6").addClass('text-primary');
-					$(".sc-msg").removeClass('hide');
-					$(".sc-msg h6").html(data.msg);
+			});
+
+		} else {
+			$.ajax({
+				type: "POST",
+				dataType:"json",
+				url: "http://cikewang.com/index.php?p=navigation&c=default&a=add",
+				data: {"uid":$.cookie("uid"),"web_url":web_url,"web_name":web_name,'web_icon_url':web_icon_url,"cate_name":category},
+				success: function(data){
+					if (data.code < 0) 
+					{
+						$(".sc-msg").removeClass('hide');
+						$(".sc-msg h6").html(data.msg);
+					}
+					else
+					{
+						$(".sc-msg h6").removeClass('text-danger');
+						$(".sc-msg h6").addClass('text-primary');
+						$(".sc-msg").removeClass('hide');
+						$(".sc-msg h6").html(data.msg);
+					}
+					setTimeout(function(i){
+						$(".sc-msg").addClass('hide');
+						$("#web_name").val('');
+						$("#web_url").val('');
+					},3000);
 				}
-				setTimeout(function(i){
-					$(".sc-msg").addClass('hide');
-					$("#web_name").val('');
-					$("#web_url").val('');
-				},3000);
-			}
-		});
+			});
+
+		}
+		
 	});
 
 	$("#loginOut").click(function(){
@@ -219,17 +249,4 @@ function my_navigation_url()
 {
 	url = "http://cikewang.com/"+$.cookie("uid");
 	$("#mynavigation").attr("href",url);
-}
-
-function get_category()
-{
-	$.ajax({
-		type: "POST",
-		dataType:"json",
-		url: "http://cikewang.com/index.php?p=navigation&c=default&a=get_category",
-		data: {"uid":$.cookie("uid")},
-		success: function(data){
-			alert(data);
-		}
-	});
 }
